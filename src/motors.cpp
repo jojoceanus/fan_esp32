@@ -60,6 +60,10 @@ void motorInit()
 	ledcSetup(0, PWM_FREQ, 8);  // 设置通道0，频率和分辨率
 	ledcAttachPin(PWM_PIN, 0);  // 将PWM引脚连接到通道0
 
+	// 默认反转
+	pinMode(CCW_PIN, OUTPUT);
+	digitalWrite(CCW_PIN, LOW);
+
 	speedDetectInit();
 
 	// 设置默认占空比

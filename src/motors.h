@@ -5,8 +5,8 @@
 #define _MOTOR_H
 
 // 转速控制配置
-#define EN_PIN GPIO_NUM_23
-#define PWM_PIN GPIO_NUM_33
+#define CCW_PIN GPIO_NUM_5
+#define PWM_PIN GPIO_NUM_18
 #define PWM_FREQ 25000
 extern int dutyCycle;
 
@@ -24,7 +24,7 @@ extern int autoControl;
 #define PAULSE_PER_ROTATION 18.0f
 #define PCNT_HIGH_LIMIT 32767
 #define PCNT_LOW_LIMIT -1
-#define PAULSE_COUNT_PIN GPIO_NUM_14
+#define PAULSE_COUNT_PIN GPIO_NUM_19
 
 //void setDutyCycle(int dc);
 void setPWM(int dc);
