@@ -15,5 +15,6 @@ extern float temperature;
 
 void dht11Init();
 void readStatus(float& ctemperature, float& chumidity);
+void readStatus();
 
 #endif

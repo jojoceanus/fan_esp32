@@ -25,6 +25,13 @@ void dht11Init()
 
 void readStatus(float& ctemperature, float& chumidity)
 {
+	chumidity = dht.readHumidity();
+	ctemperature = dht.readTemperature();
+	delay(5);
+}
+
+void readStatus()
+{
 	humidity = dht.readHumidity();
 	temperature = dht.readTemperature();
 	delay(5);
