@@ -35,7 +35,7 @@ void speedDetectInit()
 	pcnt_config_t pcntConfig = {
 		.pulse_gpio_num = PAULSE_COUNT_PIN,
 		.ctrl_gpio_num = -1,
-		.pos_mode = PCNT_COUNT_INC,   // 下降沿计数
+		.pos_mode = PCNT_COUNT_INC,   // 上升沿计数
 		.neg_mode = PCNT_COUNT_DIS,
 		.counter_h_lim = PCNT_HIGH_LIMIT,
 		.counter_l_lim = PCNT_LOW_LIMIT,
@@ -57,7 +57,7 @@ void speedDetectInit()
 void motorInit() 
 {
 	// 配置PWM
-	ledcSetup(0, PWM_FREQ, 8);  // 设置通道0，频率和分辨率
+	ledcSetup(0, PWM_FREQ, 8);  // 设置通道0，频率和分辨率8
 	ledcAttachPin(PWM_PIN, 0);  // 将PWM引脚连接到通道0
 
 	// 默认反转
