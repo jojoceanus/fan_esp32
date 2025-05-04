@@ -8,14 +8,12 @@ float temperature = 0;
 Ticker initDhtTicker;
 
 // DHT初始化回调
-void onDhtInit() 
-{
+void onDhtInit() {
 	statusTimerInit();
 	Serial.println("DHT sensor initialized.");
 }
 
-void dht11Init()
-{
+void dht11Init() {
 	// 初始化DHT
 	dht.begin();
 
@@ -23,15 +21,13 @@ void dht11Init()
   	initDhtTicker.once_ms(1000, onDhtInit);
 }
 
-void readStatus(float& ctemperature, float& chumidity)
-{
+void readStatus(float& ctemperature, float& chumidity) {
 	chumidity = dht.readHumidity();
 	ctemperature = dht.readTemperature();
 	delay(5);
 }
 
-void readStatus()
-{
+void readStatus() {
 	humidity = dht.readHumidity();
 	temperature = dht.readTemperature();
 	delay(5);

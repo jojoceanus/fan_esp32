@@ -10,8 +10,8 @@ const char endMarker = '#';
 const char devideMarker = ' ';
 
 void allSerialInit();
-void SerialInit();
+void serialInit();
 String bluetoothMessage(String sendTag, String sendMessage);
-boolean receiveMessage(String& tag, String& data);
+boolean receiveMessage(int& tag, String& data);
 
 #endif

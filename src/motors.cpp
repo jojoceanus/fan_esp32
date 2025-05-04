@@ -8,8 +8,7 @@ int currentDutyCycle = PWM_MIN_DUTY_CYCLE; // 当前占空比
 int targetDutyCycle = PWM_MIN_DUTY_CYCLE;  // 目标占空比
 
 // 设置占空比
-void setPWM(int dc)
-{
+void setPWM(int dc) {
 	// 将百分比转换为LED_CNN的实际值 (0-255)
 	int pwmValue = map(dc, 0, 100, 0, 255);
 	ledcWrite(0, pwmValue);  // 更新PWM占空比
@@ -17,8 +16,7 @@ void setPWM(int dc)
 
 int dutyCycle = 0;
 
-void speedDetectInit()
-{
+void speedDetectInit() {
 	//gpio_set_pull_mode(PAULSE_COUNT_PIN, GPIO_PULLUP_ONLY);  // 启用内部上拉
 
 	// 配置 GPIO 引脚为输入模式并启用内部上拉
@@ -54,8 +52,7 @@ void speedDetectInit()
 	speedTimerInit();
 }
 
-void motorInit() 
-{
+void motorInit() {
 	// 配置PWM
 	ledcSetup(0, PWM_FREQ, 8);  // 设置通道0，频率和分辨率8
 	ledcAttachPin(PWM_PIN, 0);  // 将PWM引脚连接到通道0
@@ -71,8 +68,7 @@ void motorInit()
 	dutyCycle = 50;
 }
 
-void simulateNaturalWind() 
-{
+void simulateNaturalWind() {
 	unsigned long currentTime = millis();
 
 	// 每隔 RANDOM_INTERVAL 毫秒生成一个新的随机目标占空比
@@ -93,7 +89,6 @@ void simulateNaturalWind()
 		currentDutyCycle = targetDutyCycle; // 防止低于目标值
 		}
 	}
-
 	// 更新PWM占空比
 	setPWM(currentDutyCycle);
 }

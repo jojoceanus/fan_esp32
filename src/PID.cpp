@@ -25,11 +25,8 @@ float hintegral = 0.0;
 float hderivative = 0.0;
 float hlastError = 0.0;
 
-// PWM输出相关
-
 // 温度控制
-void holdTemperature(const float& setTemperature)
-{
+void holdTemperature(const float& setTemperature) {
     // 计算误差
     terror = setTemperature - temperature;
 
@@ -53,8 +50,7 @@ void holdTemperature(const float& setTemperature)
 }
 
 // 湿度控制
-void holdHumidity(const float& setHumidity)
-{
+void holdHumidity(const float& setHumidity) {
     // 计算误差
     herror = setHumidity - humidity;
 

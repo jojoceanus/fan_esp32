@@ -8,7 +8,7 @@ void allSerialInit()
 	Serial.println("Initializing Serial...");
 
 	// 初始化蓝牙模块
-	SerialBT.begin("ESP32_BLUETOOTH"); // 设置蓝牙设备名称
+	SerialBT.begin("智能风扇"); // 设置蓝牙设备名称
 	Serial.println("Waiting for Bluetooth connection...");
 
 	// 等待蓝牙连接
@@ -42,58 +42,45 @@ String bluetoothMessage(String sendTag, String sendMessage) {
 int readMessage = 0;
 int tagordata = 0;
 
-boolean receiveMessage(String& tag, String& data)
+boolean receiveMessage(int& tag, String& data)
 {
 	if (SerialBT.available()) 
 	{
-		tag = "";
-		data = "";
 		while (SerialBT.available()) 
 		{
-		char c = SerialBT.read();
-		if (readMessage) 
-		{
+			char c = SerialBT.read();
 			if (c == startMarker) 
 			{
-			tag = "";
-			data = "";
-			tagordata = 1;
+				tag = 0x00;
+				data = "";
+				tagordata = 1;
 			} 
 			else if (c == devideMarker) 
 			{
-			tagordata = 2;
+				tagordata = 2;
 			} 
 			else if (c == endMarker) 
 			{
-			readMessage = 0;
-			break;
+				readMessage = 0;
+				break;
 			} 
 			else if (tagordata == 1) 
 			{
-			tag += c;
+				tag = c;
 			} 
 			else if (tagordata == 2) 
 			{
-			data += c;
+				data += c;
 			}
-		} 
-		else 
-		{
-			if (c == startMarker) 
-			{
-			readMessage = 1;
-			tagordata = 1;
-			}
-		}
 		}
 
 		if (data.length() > 0) {
-		Serial.print("tag|");
-		Serial.print(tag);
-		Serial.println("|");
-		Serial.print("data|");
-		Serial.print(data);
-		Serial.println("|");
+			Serial.print("tag|");
+			Serial.print(tag);
+			Serial.println("|");
+			Serial.print("data|");
+			Serial.print(data);
+			Serial.println("|");
 		}
 
 		return 1;
