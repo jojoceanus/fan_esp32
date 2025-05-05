@@ -11,7 +11,7 @@ const char devideMarker = ' ';
 
 void allSerialInit();
 void serialInit();
-String bluetoothMessage(String sendTag, String sendMessage);
+String bluetoothMessage(int sendTag, String sendMessage);
 boolean receiveMessage(int& tag, String& data);
 
 #endif

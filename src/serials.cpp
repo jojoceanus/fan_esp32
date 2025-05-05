@@ -29,7 +29,17 @@ void serialInit()
 	Serial.println("Initializing Serial...");
 }
 
-String bluetoothMessage(String sendTag, String sendMessage) {
+// String bluetoothMessage(String& sendTag, String& sendMessage) {
+// 	String data = "";
+// 	data += startMarker;
+// 	data += sendTag;
+// 	data += devideMarker;
+// 	data += sendMessage;
+// 	data += endMarker;
+// 	return data;
+// }
+
+String bluetoothMessage(int sendTag, String sendMessage) {
 	String data = "";
 	data += startMarker;
 	data += sendTag;
@@ -51,7 +61,7 @@ boolean receiveMessage(int& tag, String& data)
 			char c = SerialBT.read();
 			if (c == startMarker) 
 			{
-				tag = 0x00;
+				tag = 0;
 				data = "";
 				tagordata = 1;
 			} 

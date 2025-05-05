@@ -6,14 +6,16 @@
 #include "timers.h"
 #include "PID.h"
 
-int tag = 0x00;
+int tag = 0;
 String data = "";
 
 enum Tags {
-	NATW = 0x01,
+	NATW = 1,
 	HOLDH,
 	HOLDT,
-	SPEED
+	SPEED,
+	HUMIDITY,
+	TEMPERATURE
 };
 
 void setup() {
@@ -46,11 +48,8 @@ void loop() {
 		}
 		else {
 			Serial.println("-----error-----");
-			Serial.println(tag);
-			Serial.println(data);
-			Serial.println("-----error-----");
 		}
-		tag = 0x00;
+		tag = 0;
 		data = "";
 	}
 
@@ -80,7 +79,8 @@ void loop() {
 		String formatresult = String(result, 1);
 		Serial.println(count);
 		//Serial.println(bluetoothMessage("SPEED", formatresult));
-		SerialBT.print(bluetoothMessage("SPEED", formatresult));
+		//SerialBT.print(bluetoothMessage("SPEED", formatresult));
+		SerialBT.print(bluetoothMessage(SPEED, formatresult));
 	}
 	
 	// 处理状态数据
@@ -88,9 +88,9 @@ void loop() {
 		statusReady = false;
 		readStatus(temperature, humidity);
 
-		Serial.println(bluetoothMessage("HUMIDITY", String(humidity, 1)));
-		Serial.println(bluetoothMessage("TEMPERATURE", String(temperature, 1)));
-		SerialBT.print(bluetoothMessage("HUMIDITY", String(humidity, 1)));
-		SerialBT.print(bluetoothMessage("TEMPERATURE", String(temperature, 1)));
+		Serial.println(bluetoothMessage(HUMIDITY, String(humidity, 1)));
+		Serial.println(bluetoothMessage(TEMPERATURE, String(temperature, 1)));
+		SerialBT.print(bluetoothMessage(HUMIDITY, String(humidity, 1)));
+		SerialBT.print(bluetoothMessage(TEMPERATURE, String(temperature, 1)));
 	}
 }
