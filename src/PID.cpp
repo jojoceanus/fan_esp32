@@ -43,10 +43,10 @@ void holdTemperature(const float& setTemperature) {
     float tpidOutput = tKp * terror + tKi * tintegral + tKd * tderivative;
 
     // 将PID输出映射到PWM占空比 (反向逻辑：占空比越高，风扇转速越慢)
-    dutyCycle = constrain(50 - tpidOutput, 0, 100); // 50为基准值，可根据需求调整
+    int dutyCyclet = constrain(50 - tpidOutput, 0, 100); // 50为基准值，可根据需求调整
 
     // 调用setPWM函数设置占空比
-    setPWM(dutyCycle);
+    setPWM(dutyCyclet);
 }
 
 // 湿度控制
@@ -67,8 +67,24 @@ void holdHumidity(const float& setHumidity) {
     float hpidOutput = hKp * herror + hKi * hintegral + hKd * hderivative;
 
     // 将PID输出映射到PWM占空比 (反向逻辑：占空比越高，风扇转速越慢)
-    dutyCycle = constrain(50 - hpidOutput, 0, 100); // 50为基准值，可根据需求调整
+    int dutyCycleh = constrain(50 - hpidOutput, 0, 100); // 50为基准值，可根据需求调整
 
     // 调用setPWM函数设置占空比
-    setPWM(dutyCycle);
+    setPWM(dutyCycleh);
+}
+
+// 温度控制, 使用线性控制
+void holdTemperatureL(const float& setTemperature) {
+    terror = setTemperature - temperature;
+    int dutyCyclet = dutyCycle + 10 * terror;
+    dutyCyclet = constrain(dutyCyclet, 0, 100); 
+    setPWM(dutyCyclet);
+}
+
+// 湿度控制，使用线性控制
+void holdHumidityL(const float& setHumidity) {
+    herror = setHumidity - humidity;
+    int dutyCycleh = dutyCycle + 10 * herror;
+    dutyCycleh = constrain(dutyCycleh, 0, 100); 
+    setPWM(dutyCycleh);
 }

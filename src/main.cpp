@@ -58,12 +58,12 @@ void loop() {
 	}
 	else if (autoControl == 2) {
 		readStatus(temperature, humidity);
-		holdHumidity(setHumidity);
+		holdHumidityL(setHumidity);
 		delay(500);
 	}
 	else if (autoControl == 3) {
 		readStatus(temperature, humidity);
-		holdTemperature(setTemperature);
+		holdTemperatureL(setTemperature);
 		delay(500);
 	}
 	

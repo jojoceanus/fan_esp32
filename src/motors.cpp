@@ -11,6 +11,7 @@ int targetDutyCycle = PWM_MIN_DUTY_CYCLE;  // 目标占空比
 void setPWM(int dc) {
 	// 将百分比转换为LED_CNN的实际值 (0-255)
 	int pwmValue = map(dc, 0, 100, 0, 255);
+	dutyCycle = dc;
 	ledcWrite(0, pwmValue);  // 更新PWM占空比
 }
 
